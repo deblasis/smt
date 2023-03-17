@@ -9,6 +9,7 @@ type MapStore interface {
 	Get(key []byte) ([]byte, error)     // Get gets the value for a key.
 	Set(key []byte, value []byte) error // Set updates the value for a key.
 	Delete(key []byte) error            // Delete deletes a key.
+	GetAllKeys() [][]byte               // GetAllKeys returns all keys in the store.
 }
 
 // InvalidKeyError is thrown when a key that does not exist is being accessed.
@@ -54,4 +55,13 @@ func (sm *SimpleMap) Delete(key []byte) error {
 		return nil
 	}
 	return &InvalidKeyError{Key: key}
+}
+
+// GetAllKeys returns all keys in the store.
+func (sm *SimpleMap) GetAllKeys() [][]byte {
+	keys := make([][]byte, 0, len(sm.m))
+	for key := range sm.m {
+		keys = append(keys, []byte(key))
+	}
+	return keys
 }
