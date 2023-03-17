@@ -455,3 +455,13 @@ func (smt *SparseMerkleTree) ProveCompactForRoot(key []byte, root []byte) (Spars
 	compactedProof, err := CompactProof(proof, smt.th.hasher)
 	return compactedProof, err
 }
+
+// GetNodes returns the nodes of the tree.
+func (smt *SparseMerkleTree) GetNodes() MapStore {
+	return smt.nodes
+}
+
+// GetValues returns the values of the tree.
+func (smt *SparseMerkleTree) GetValues() MapStore {
+	return smt.values
+}
